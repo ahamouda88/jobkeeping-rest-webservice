@@ -27,7 +27,7 @@ public class WorkOrderController {
 	private IQueueService queueService;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss");
 
-	@RequestMapping(value = URIConstants.ADD_WORKORDER,  method = RequestMethod.POST)
+	@RequestMapping(value = URIConstants.ADD_WORKORDER,  method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public EmployeeWorkOrder addWorkOrder(@RequestParam(value = "id") long id,
 			@RequestParam(value = "date") String enteredDate) {
@@ -65,12 +65,12 @@ public class WorkOrderController {
 		return position;
 	}
 	
-	@RequestMapping(value = URIConstants.REMOVE_WORKORDER, method = RequestMethod.DELETE)
-	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public String removeId(@PathVariable("id") long id){
+	@RequestMapping(value = URIConstants.REMOVE_WORKORDER, method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	public EmployeeWorkOrder removeId(@PathVariable("id") long id){
 		EmployeeWorkOrder employeeWorkOrder = queueService.removeId(id);
 		checkNotFound(employeeWorkOrder);
-		return "ID Removed!";
+		return employeeWorkOrder;
 	}
 	
 	@RequestMapping(value = URIConstants.GETAVGTIME_WORKORDER, method = RequestMethod.GET)

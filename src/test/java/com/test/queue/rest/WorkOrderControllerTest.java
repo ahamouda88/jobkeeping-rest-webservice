@@ -33,13 +33,13 @@ public class WorkOrderControllerTest {
     public void setUp() throws Exception{
     	mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     	
-    	mockMvc.perform(MockMvcRequestBuilders.post(URIConstants.ADD_WORKORDER + "?id=10&date=2015-7-27_09:18:22"))
+    	mockMvc.perform(MockMvcRequestBuilders.get(URIConstants.ADD_WORKORDER + "?id=10&date=2015-7-27_09:18:22"))
 			.andExpect(MockMvcResultMatchers.status().isCreated()).andDo(MockMvcResultHandlers.print());
 	
-    	mockMvc.perform(MockMvcRequestBuilders.post(URIConstants.ADD_WORKORDER + "?id=15&date=2015-7-27_09:19:23"))
+    	mockMvc.perform(MockMvcRequestBuilders.get(URIConstants.ADD_WORKORDER + "?id=15&date=2015-7-27_09:19:23"))
     		.andExpect(MockMvcResultMatchers.status().isCreated()).andDo(MockMvcResultHandlers.print());
     	
-    	mockMvc.perform(MockMvcRequestBuilders.post(URIConstants.ADD_WORKORDER + "?id=30&date=2015-7-27_09:19:21"))
+    	mockMvc.perform(MockMvcRequestBuilders.get(URIConstants.ADD_WORKORDER + "?id=30&date=2015-7-27_09:19:21"))
 			.andExpect(MockMvcResultMatchers.status().isCreated()).andDo(MockMvcResultHandlers.print());
     }
 	
@@ -55,8 +55,8 @@ public class WorkOrderControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
 		
 		long id = 10;
-		mockMvc.perform(MockMvcRequestBuilders.delete(URIConstants.REMOVE_WORKORDER, id))
-				.andExpect(MockMvcResultMatchers.status().isNoContent()).andDo(MockMvcResultHandlers.print()).andReturn();
+		mockMvc.perform(MockMvcRequestBuilders.get(URIConstants.REMOVE_WORKORDER, id))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
 		
 		mockMvc.perform(MockMvcRequestBuilders.get(URIConstants.GETPOS_WORKORDER, id))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();

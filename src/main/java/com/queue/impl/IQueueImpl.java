@@ -32,6 +32,7 @@ public interface IQueueImpl<E> {
 	
 	/**
 	 * A Method to return all elements in the queue.
+	 * This method returns <b>'empty set'</b> if queue is already empty.
 	 * 
 	 * @return set of sorted elements in the queue.
 	 */
