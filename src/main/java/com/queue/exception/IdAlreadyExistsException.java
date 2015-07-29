@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 
-@ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class IdAlreadyExistsException extends RuntimeException{
 	
 	private static final long serialVersionUID = 6313903570316610980L;
