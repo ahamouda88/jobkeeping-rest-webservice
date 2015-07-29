@@ -1,0 +1,101 @@
+package com.queue.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+
+/**
+ * An abstract class that represents the main attributes for an employee's ID. 
+ * 
+ * @author ahamouda
+ *
+ */
+public abstract class EmployeeWorkOrder implements Serializable{
+
+	/*
+	 * Date now = new Date(); // java.util.Date, NOT java.sql.Date or java.sql.Timestamp!
+String format1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(now);
+String format2 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z").format(now);
+String format3 = new SimpleDateFormat("yyyyMMddHHmmss").format(now);
+	 */
+	
+	
+	private static final long serialVersionUID = -1278762727599316159L;
+	
+	/*
+	 * Fields
+	 */
+	private long id;
+	@JsonSerialize(using=DateSerializer.class)
+	private Date enteredDate;	
+	
+	/*
+	 * Constructors
+	 */
+	public EmployeeWorkOrder(long id, Date enteredDate){
+		this.id = id;
+		this.enteredDate = enteredDate;
+	}
+
+	/*
+	 * Setters and Getters
+	 */
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	@JsonSerialize(using=CustomDateSerializer.class)
+	public Date getEnteredDate() {
+		return enteredDate;
+	}
+
+	public void setEnteredDate(Date enteredDate) {
+		this.enteredDate = enteredDate;
+	}
+
+	/**
+	 * A Method to get the rank of Employee according to his ID, given the current date.
+	 * Current date should be later than the entered date.
+	 * 
+	 * @param date - date to be compared with the employee's entered date.
+	 * @return employee's ID rank.
+	 */
+	public abstract long getRank(Date date);
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((enteredDate == null) ? 0 : enteredDate.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EmployeeWorkOrder other = (EmployeeWorkOrder) obj;
+		if (enteredDate == null) {
+			if (other.enteredDate != null)
+				return false;
+		} else if (!enteredDate.equals(other.enteredDate))
+			return false;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	
+	
+}
