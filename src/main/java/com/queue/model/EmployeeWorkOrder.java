@@ -12,15 +12,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
  * @author ahamouda
  *
  */
-public abstract class EmployeeWorkOrder implements Serializable{
-
-	/*
-	 * Date now = new Date(); // java.util.Date, NOT java.sql.Date or java.sql.Timestamp!
-String format1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(now);
-String format2 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z").format(now);
-String format3 = new SimpleDateFormat("yyyyMMddHHmmss").format(now);
-	 */
-	
+public abstract class EmployeeWorkOrder implements Serializable{	
 	
 	private static final long serialVersionUID = -1278762727599316159L;
 	

@@ -1,8 +1,7 @@
 package com.queue.impl;
 
-import java.util.Comparator;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 
 public interface IQueueImpl<E> {
 
@@ -32,11 +31,11 @@ public interface IQueueImpl<E> {
 	public E peek();
 	
 	/**
-	 * A Method to return all elements in the queue, after sorting them.
+	 * A Method to return all elements in the queue.
 	 * 
-	 * @return list of sorted elements in the queue.
+	 * @return set of sorted elements in the queue.
 	 */
-	public List<E> getAll();
+	public Set<E> getAll();
 	
 	/**
 	 * A Method to remove an element from the queue. Given the element to be removed.
@@ -60,13 +59,6 @@ public interface IQueueImpl<E> {
 	 * @return iterator over the elements.
 	 */
 	public Iterator<E> iterator();
-	
-	/**
-	 * A Method to return the comparator used or it will return <b>'null'</b> if queue sorted in natural order.
-	 * 
-	 * @return the comparator used.
-	 */
-	public Comparator<? super E> comparator();
 	
 	/**
 	 * A Method to remove all elements in this queue.

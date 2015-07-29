@@ -61,11 +61,6 @@ public abstract class AbstractQueueImpl<E> implements IQueueImpl<E>{
 	}
 	
 	@Override
-	public Comparator<? super E> comparator(){
-		return priorityQueue.comparator();
-	}
-	
-	@Override
 	public int size(){
 		return priorityQueue.size();
 	}
