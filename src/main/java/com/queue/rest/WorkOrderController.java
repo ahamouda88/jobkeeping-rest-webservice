@@ -2,7 +2,6 @@ package com.queue.rest;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -26,14 +25,14 @@ public class WorkOrderController {
 	
 	@Autowired
 	private IQueueService queueService;
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss");
 
 	@RequestMapping(value = URIConstants.ADD_WORKORDER,  method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public EmployeeWorkOrder addWorkOrder(@RequestParam(value = "id") long id,
 			@RequestParam(value = "date") String enteredDate) {
 		
-		EmployeeWorkOrder empWorkOrder = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss");
+		EmployeeWorkOrder empWorkOrder = null;		
 	    try {
 			Date date = sdf.parse(enteredDate);
 			empWorkOrder = queueService.addWorkOrder(id, date);
@@ -68,18 +67,22 @@ public class WorkOrderController {
 	
 	@RequestMapping(value = URIConstants.REMOVE_WORKORDER, method = RequestMethod.DELETE)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public EmployeeWorkOrder removeId(@PathVariable("id") long id){
+	public String removeId(@PathVariable("id") long id){
 		EmployeeWorkOrder employeeWorkOrder = queueService.removeId(id);
 		checkNotFound(employeeWorkOrder);
-		return employeeWorkOrder;
+		return "ID Removed!";
 	}
 	
 	@RequestMapping(value = URIConstants.GETAVGTIME_WORKORDER, method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
-	public double getAvgTime(@PathVariable("id") long id){
-		Calendar cal = Calendar.getInstance();
-		Date currentDate = cal.getTime();
-		double avgTime = queueService.getAverageTime(currentDate);
+	public double getAverageTime(@RequestParam(value = "date") String date) {
+		double avgTime = 0;
+		try {
+			Date currentDate = sdf.parse(date);
+			avgTime = queueService.getAverageTime(currentDate);
+		} catch (ParseException ex) {
+			throw new BadRequestException();
+		}
 		return avgTime;
 	}
 	
