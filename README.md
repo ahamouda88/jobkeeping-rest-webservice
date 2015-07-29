@@ -20,6 +20,6 @@ The application is packaged as a 'war'. Data is tranformed into JSON.
 |/workorders/{id}                    | Returns the position of a specific Id in the queue, indexed from 0.     |
 |/workorders/top                     | Returns the employee's Id on the top of the queue.                      |
 |/workorders/remove/{id}             | Removes the work order for the given employee Id.                       | |/workorders/averagetime?date={date} | Returns average wait time by all work orders in the queue.              |
-|                                    |                                                                         |
+|------------------------------------|-------------------------------------------------------------------------|
 
 
