@@ -57,5 +57,8 @@ public class WorkOrderControllerTest {
 		long id = 10;
 		mockMvc.perform(MockMvcRequestBuilders.delete(URIConstants.REMOVE_WORKORDER, id))
 				.andExpect(MockMvcResultMatchers.status().isNoContent()).andDo(MockMvcResultHandlers.print()).andReturn();
+		
+		mockMvc.perform(MockMvcRequestBuilders.get(URIConstants.GETPOS_WORKORDER, id))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
 	}
 }
