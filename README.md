@@ -3,7 +3,8 @@ This simple restful webservice is used to prioritize work orders for the employe
 The application is implemented using Spring Boot, Maven, and Java.
 
 ## Running the application:
-The application is packaged as a 'war'.
+The application is packaged as a 'war'. Data is tranformed into JSON
+###### Note: Date provided should be in the following format: yyyy-MM-dd_hh:mm:ss. For example: 2015-07-29_09:10:20
 
 ## RESTful Web Service End Points:
 |              URI                   |                               Description                               |
@@ -14,4 +15,4 @@ The application is packaged as a 'war'.
 |/workorders/top                     | Returns the employee's Id on the top of the queue.                      |
 |/workorders/remove/{id}             | Removes the work order for the given employee Id.                       | |/averagetime?date={date}            | Returns average wait time by all work orders in the queue.              |
 
-###### Note: Date provided should be in the following format: yyyy-MM-dd_hh:mm:ss. For example: 2015-07-29_09:10:20
+
