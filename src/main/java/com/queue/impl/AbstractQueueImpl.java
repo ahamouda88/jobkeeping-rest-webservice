@@ -40,7 +40,9 @@ public abstract class AbstractQueueImpl<E> implements IQueueImpl<E>{
 		E element = null;
 		if(!priorityQueue.isEmpty()){
 			element = priorityQueue.poll();
-			treeSet.remove(element);
+			if(element != null){
+				treeSet.remove(element);
+			}
 		}
 		return element;
 	}
@@ -59,7 +61,9 @@ public abstract class AbstractQueueImpl<E> implements IQueueImpl<E>{
 		boolean result = false;
 		if(element != null && !priorityQueue.isEmpty()){
 			result = priorityQueue.remove(element);
-			treeSet.remove(element);
+			if(result){
+				treeSet.remove(element);
+			}
 		}
 		return result;
 	}
