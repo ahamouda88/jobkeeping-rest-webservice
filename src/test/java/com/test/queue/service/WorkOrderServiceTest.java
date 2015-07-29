@@ -111,8 +111,12 @@ public class WorkOrderServiceTest {
 	
 	@Test
 	public void testGetAllIds(){
+		String expectedOrder = "30151093";
+		StringBuilder actualOrder = new StringBuilder();
 		List<Long> actualList = workOrderService.getSortedIds();
-		System.out.println();
-		System.out.println(actualList.size());
+		for(Long id : actualList){
+			actualOrder.append(id);
+		}
+		Assert.assertEquals(expectedOrder, actualOrder.toString());
 	}
 }
