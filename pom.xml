@@ -54,12 +54,6 @@
   
   <build>
     <plugins>
-        <!-- Spring Boot Plugin -->
-        <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-        </plugin>
-
 		<!-- Maven Compiler Plugin -->
 	 	<plugin>
     		<groupId>org.apache.maven.plugins</groupId>
