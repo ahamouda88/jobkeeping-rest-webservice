@@ -1,13 +1,11 @@
 package com.queue.impl;
 
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.PriorityQueue;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 /**
  * An Abstract class that contains the common methods for manipulating a queue.
+ * The add, remove, and poll methods take O(logN) time complexity. While the peek takes only O(1).
  * 
  * @author ahamouda
  *
@@ -15,22 +13,27 @@ import java.util.TreeSet;
  */
 public abstract class AbstractQueueImpl<E> implements IQueueImpl<E>{
 	
-	protected PriorityQueue<E> priorityQueue;
-	protected Set<E> treeSet;
+	/*
+	 * Used the the same data type as both Key and Value. To have the same functionality as a priority queue.
+	 */
+	protected TreeMap<E, E> treeMap;
+	
+	/*
+	 *  This counter variable is used to check the number of elements entered. It is different than the size() method.
+	 *  It count all elements entered the queue.
+	 */	
+	protected long count;
 	
 	public AbstractQueueImpl(Comparator<E> comparator){
-		priorityQueue = new PriorityQueue<E>(comparator);
-		treeSet = new TreeSet<E>(comparator);
+		treeMap = new TreeMap<E, E>(comparator);
 	}
 
 	@Override
 	public boolean add(E element){
 		boolean result = false;
 		if(element != null){
-			result = priorityQueue.add(element);
-			if(result){
-				treeSet.add(element);
-			}
+			treeMap.put(element, element);
+			result = true;
 		}
 		return result;
 	}
@@ -38,11 +41,9 @@ public abstract class AbstractQueueImpl<E> implements IQueueImpl<E>{
 	@Override
 	public E poll(){
 		E element = null;
-		if(!priorityQueue.isEmpty()){
-			element = priorityQueue.poll();
-			if(element != null){
-				treeSet.remove(element);
-			}
+		if(!treeMap.isEmpty()){
+			element = treeMap.firstKey();
+			treeMap.remove(element);
 		}
 		return element;
 	}
@@ -50,8 +51,8 @@ public abstract class AbstractQueueImpl<E> implements IQueueImpl<E>{
 	@Override
 	public E peek(){
 		E element = null;
-		if(!priorityQueue.isEmpty()){
-			element = priorityQueue.peek();
+		if(!treeMap.isEmpty()){
+			element = treeMap.firstKey();
 		}
 		return element;
 	}
@@ -59,28 +60,23 @@ public abstract class AbstractQueueImpl<E> implements IQueueImpl<E>{
 	@Override
 	public boolean remove(E element){
 		boolean result = false;
-		if(element != null && !priorityQueue.isEmpty()){
-			result = priorityQueue.remove(element);
-			if(result){
-				treeSet.remove(element);
+		if(element != null && !treeMap.isEmpty()){
+			E removed = treeMap.remove(element);
+			if(removed != null){
+				result = true;
 			}
 		}
 		return result;
 	}
-	
-	@Override
-	public Iterator<E> iterator(){
-		return priorityQueue.iterator();
-	}
+
 	
 	@Override
 	public int size(){
-		return priorityQueue.size();
+		return treeMap.size();
 	}
 	
 	@Override
 	public void clear(){
-		priorityQueue.clear();
-		treeSet.clear();
+		treeMap.clear();
 	}
 }

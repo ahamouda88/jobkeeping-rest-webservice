@@ -36,6 +36,12 @@ public class RankComparator implements Comparator<EmployeeWorkOrder> {
 			result = Long.compare(rank2, rank1);
 		}
 		
+		/*
+		 *  If two work-orders have the same rank, then compare them according to the order they entered the queue.
+		 */
+		if(result == 0){
+			result = emp1.compareTo(emp2);
+		}
 		return result;
 	}
 

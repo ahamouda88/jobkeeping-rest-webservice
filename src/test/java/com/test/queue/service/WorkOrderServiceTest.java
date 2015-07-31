@@ -61,7 +61,9 @@ public class WorkOrderServiceTest {
 		actual = workOrderService.addWorkOrder(10, date5);
 		Assert.assertNotNull(actual);
 		
-		System.out.println("Orders should be sorted in the following Id order: 30, 15, 10, 9, 3");
+		cal.set(Calendar.SECOND, 20);
+		actual = workOrderService.addWorkOrder(20, date5);
+		Assert.assertNotNull(actual);
 	}
 	
 	@Test(expected=IdAlreadyExistsException.class)
@@ -104,14 +106,14 @@ public class WorkOrderServiceTest {
 		long actualPos = workOrderService.getIdPosition(10);
 		Assert.assertEquals(expectedPos, actualPos);
 		
-		expectedPos = 4;
+		expectedPos = 5;
 		actualPos =  workOrderService.getIdPosition(3);
 		Assert.assertEquals(expectedPos, actualPos);
 	}
 	
 	@Test
 	public void testGetAllIds(){
-		String expectedOrder = "30151093";
+		String expectedOrder = "3015102093";
 		StringBuilder actualOrder = new StringBuilder();
 		List<Long> actualList = workOrderService.getSortedIds();
 		for(Long id : actualList){

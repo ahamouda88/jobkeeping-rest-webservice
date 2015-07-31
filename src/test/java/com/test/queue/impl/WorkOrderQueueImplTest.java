@@ -2,7 +2,6 @@ package com.test.queue.impl;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -74,12 +73,6 @@ public class WorkOrderQueueImplTest {
 
 		long resultID = workOrderQueue.poll().getId();
 		Assert.assertEquals(expectedFirstID, resultID);
-
-		Iterator<EmployeeWorkOrder> itr = workOrderQueue.iterator();
-		while(itr.hasNext()){
-			EmployeeWorkOrder empWorkOrder = itr.next();
-			System.out.println("Employee ID: "+empWorkOrder.getId() + " - " + empWorkOrder.getEnteredDate());
-		}
 	}
 	
 	@Test

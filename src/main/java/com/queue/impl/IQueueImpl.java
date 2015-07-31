@@ -1,8 +1,14 @@
 package com.queue.impl;
 
-import java.util.Iterator;
-import java.util.Set;
+import java.util.Collection;
 
+/**
+ * An Interface for that contains the main methods for queue implementation.
+ * 
+ * @author ahamouda
+ *
+ * @param <E>
+ */
 public interface IQueueImpl<E> {
 
 	/**
@@ -31,14 +37,6 @@ public interface IQueueImpl<E> {
 	public E peek();
 	
 	/**
-	 * A Method to return all elements in the queue.
-	 * This method returns <b>'empty set'</b> if queue is already empty.
-	 * 
-	 * @return set of sorted elements in the queue.
-	 */
-	public Set<E> getAll();
-	
-	/**
 	 * A Method to remove an element from the queue. Given the element to be removed.
 	 * This method returns <b>'false'</b> if queue is empty, or element is null.
 	 * 
@@ -55,11 +53,12 @@ public interface IQueueImpl<E> {
 	public int size();
 	
 	/**
-	 * A Method to return an iterator over the elements in this queue.
+	 * A Method to return all elements in the queue.
+	 * This method returns <b>'empty list'</b> if queue is already empty.
 	 * 
-	 * @return iterator over the elements.
+	 * @return set of sorted elements in the queue.
 	 */
-	public Iterator<E> iterator();
+	public Collection<E> getAll();
 	
 	/**
 	 * A Method to remove all elements in this queue.

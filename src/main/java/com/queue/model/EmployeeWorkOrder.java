@@ -3,6 +3,7 @@ package com.queue.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
@@ -12,7 +13,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
  * @author ahamouda
  *
  */
-public abstract class EmployeeWorkOrder implements Serializable{	
+public abstract class EmployeeWorkOrder implements Serializable, Comparable<EmployeeWorkOrder> {	
 	
 	private static final long serialVersionUID = -1278762727599316159L;
 	
@@ -22,6 +23,8 @@ public abstract class EmployeeWorkOrder implements Serializable{
 	private long id;
 	@JsonSerialize(using=DateSerializer.class)
 	private Date enteredDate;	
+	@JsonIgnore
+	private long order;
 	
 	/*
 	 * Constructors
@@ -49,6 +52,14 @@ public abstract class EmployeeWorkOrder implements Serializable{
 
 	public void setEnteredDate(Date enteredDate) {
 		this.enteredDate = enteredDate;
+	}
+	
+	public long getOrder() {
+		return order;
+	}
+
+	public void setOrder(long order) {
+		this.order = order;
 	}
 
 	/**
@@ -86,8 +97,18 @@ public abstract class EmployeeWorkOrder implements Serializable{
 			return false;
 		if (id != other.id)
 			return false;
+		if (order != other.order)
+			return false;
 		return true;
 	}
 	
+	/*
+	 *  Implemented Comparable, to check in case if two work-orders have the same Rank.
+	 *  It will use the order they have entered the queue in the comparison.
+	 */	
+	@Override
+	public int compareTo(EmployeeWorkOrder emp) {
+		return Long.compare(this.getOrder(), emp.getOrder());
+	}
 	
 }

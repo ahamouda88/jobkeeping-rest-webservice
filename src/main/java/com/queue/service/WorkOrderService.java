@@ -1,12 +1,11 @@
 package com.queue.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,7 +57,7 @@ public class WorkOrderService implements IQueueService{
 	@Override
 	public List<Long> getSortedIds() {
 		List<Long> list = new ArrayList<Long>();
-		Set<EmployeeWorkOrder> setOfOrders = workOrderQueue.getAll();
+		Collection<EmployeeWorkOrder> setOfOrders = workOrderQueue.getAll();
 		for(EmployeeWorkOrder empOrder : setOfOrders){
 			list.add(empOrder.getId());
 		}		
@@ -70,10 +69,8 @@ public class WorkOrderService implements IQueueService{
 		EmployeeWorkOrder empWorkOrder = null;
 		if(workOrderMap.get(id) != null){
 			empWorkOrder = workOrderMap.get(id);
-			if(empWorkOrder != null){
-				workOrderQueue.remove(empWorkOrder);
-				workOrderMap.remove(id);
-			}
+			workOrderQueue.remove(empWorkOrder);
+			workOrderMap.remove(id);
 		}
 		return empWorkOrder;
 	}
@@ -82,7 +79,7 @@ public class WorkOrderService implements IQueueService{
 	public long getIdPosition(long id) {
 		int position = -1;
 		if(workOrderMap.get(id) != null){
-			Set<EmployeeWorkOrder> setOfOrders = workOrderQueue.getAll();
+			Collection<EmployeeWorkOrder> setOfOrders = workOrderQueue.getAll();
 			position = 0;
 			for(EmployeeWorkOrder empWorkOrder : setOfOrders){
 				if(empWorkOrder.getId() == id){
@@ -98,9 +95,8 @@ public class WorkOrderService implements IQueueService{
 	public double getAverageTime(Date currentTime) {
 		double numberOfSeconds = 0;
 		
-		Iterator<EmployeeWorkOrder> itr = workOrderQueue.iterator();		
-		while(itr.hasNext()){
-			EmployeeWorkOrder empWorkOrder = itr.next();
+		Collection<EmployeeWorkOrder> setOfOrders = workOrderQueue.getAll();		
+		for(EmployeeWorkOrder empWorkOrder : setOfOrders){
 			numberOfSeconds += DateUtil.numberOfSecondsBetween(empWorkOrder.getEnteredDate(), currentTime);
 		}
 		double size = workOrderQueue.size();
