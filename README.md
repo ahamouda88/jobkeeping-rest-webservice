@@ -6,7 +6,7 @@ The application is implemented using Spring Boot, Maven, and Java.
 The application is packaged as a 'war'. Data is tranformed into JSON.
 ###### Steps to execute:
 - Clone the repository.
-- Java version should be 1.7
+- Java version should be 1.8
 - Build the application using the following command: mvn clean install
 - Run maven goal spring-boot:run using the following command: mvn spring-boot:run
 
